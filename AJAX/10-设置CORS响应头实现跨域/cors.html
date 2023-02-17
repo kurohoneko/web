@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10-设置CORS响应头实现跨域</title>
+</head>
+<body>
+    <button>点击发送请求</button>
+    <h1 id="result"></h1>
+    <script>
+        const btn = document.querySelector('button');
+        btn.onclick = function(){
+            // 1.创建对象
+            const xhr = new XMLHttpRequest();
+            // 2.初始化设置
+            xhr.open("GET","http://127.0.0.1:8000/cors-server");
+            // 3.发送
+            xhr.send();
+            // 4.绑定事件
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4){
+                    if(xhr.status >= 200 && xhr.status < 300){
+                        // 输出响应
+                        console.log(xhr.response);
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

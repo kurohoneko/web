@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fetch-AJAX</title>
+</head>
+<body>
+    <button>fetch AJAX请求</button>
+    <script>
+        const btn = document.querySelector('button');
+
+        // fetch(url [,config] )
+        btn.onclick = function(){
+            fetch('http://127.0.0.1:8000/fetch-server?userid=333', {
+                //请求方法
+                method: 'POST',
+                //请求头
+                headers: {
+                    name: 'HHHHHHHHHHHHHH'
+                },
+                //请求体
+                body: 'username=admin&password=admin'
+            }).then(response => {
+                //返回结果
+                console.log(response);
+                //获取响应体body，得使用返回结果里面的方法 __proto__ 里的 text() 或 json()
+                return response.text();
+                //return response.json();  //如果服务端返回结果是 json，那就把方法换成 .json()，会解析成js对象。
+            }).then(response => {
+                console.log(response);
+            })
+        }
+    </script>
+    
+</body>
+</html>

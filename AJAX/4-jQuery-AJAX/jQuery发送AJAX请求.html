@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery发送AJAX请求</title>
+    <!-- 公共cdn 引用jQuery文件 crossorigin跨源请求的属性设置 anonymous匿名的-->
+    <script crossorigin="anonymous" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.3/jquery.js"></script>
+</head>
+<body>
+    <div class="box">
+        <h1>jQuery发送AJAX请求</h1>
+        <button>GET</button>
+        <button>POST</button>
+        <button>通用型 AJAX</button>
+    </div>
+    <script>
+        // 在浏览器显示get是字符串，post是表单，post的请求参数不在url后面，在payload的Form Data
+        $('button').eq(0).click(function(){
+            $.get('http://127.0.0.1:8000/jquery-server', {a:100,b:200}, function(data){
+                console.log(data);
+            });           // 显示的是字符串类型的
+        });
+
+        $('button').eq(1).click(function(){
+            $.post('http://127.0.0.1:8000/jquery-server', {a:100,b:200}, function(data){
+                console.log(data);
+            }, 'json');   // 显示的是对象
+        });
+
+        $('button').eq(2).click(function(){
+            //$.ajax({ // 参数 是对象形式的 });
+            $.ajax({
+                // url
+                url: 'http://127.0.0.1:8000/jquery-server',
+                // 参数
+                data: {a:100,b:200,c:'三百多'},
+                // 请求类型
+                type: 'GET',
+                // 响应体结果类型
+                dataType: 'json',
+                // 成功的回调
+                success: function(data){
+                    console.log(data);
+                },
+                // 超时时间
+                timeout: 2000,
+                // 失败的回调
+                error: function() {
+                    alert("出错啦！");
+                },
+                // 头信息
+                headers: {
+                    aaa: 300,
+                    aab: 333333
+                }
+            });
+        });
+    </script>
+</body>
+</html>

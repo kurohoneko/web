@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5-Axios发送AJAX请求</title>
+    <script crossorigin="anonymous" src="https://cdn.bootcdn.net/ajax/libs/axios/1.3.2/axios.min.js"></script>
+</head>
+<body>
+    <button>GET</button>
+    <button>POST</button>
+    <button>AJAX</button>
+    <script>
+        const btns = document.querySelectorAll('button');
+
+        //配置 baseURL
+        axios.defaults.baseURL = 'http://127.0.0.1:8000';
+        
+        // 【GET】 axios.get(url [,config其他配置] )
+        btns[0].onclick = function(){
+            //GET请求
+            //axios.get('http://127.0.0.1:8000/axios-server', {
+            axios.get('/axios-server', {
+                //url参数
+                params: {
+                    id:100,
+                    vip:7
+                },
+                //请求头信息
+                headers: {
+                    name:'xxxx',
+                    n_age:20
+                }
+            }).then(value => {
+                console.log(value);   //数据返回和处理与jQuery不一样，jQuery返回数据用回调函数。
+            })
+        };
+
+        // 【POST】 axios.post(url [,data [,config]] )
+        btns[1].onclick = function(){
+            axios.post('/axios-server', {
+                // data请求体
+                username: 'admin XXXX',
+                userpasw: '1234567890'
+            }, {
+                // config其他参数
+                //url
+                params: {
+                    id:200,
+                    vip:999
+                },
+                //请求头参数
+                headers: {
+                    height: 290,
+                    weight: 290
+                }
+            });
+        };
+
+        // 【通用方式】 axios(url [,config])
+        btns[2].onclick = function(){
+            axios({
+                //请求方法
+                method: 'POST',
+                //url
+                url: '/axios-server',
+                //url参数
+                params: {
+                    pid:1234,
+                    pname:12121212
+                },
+                //头信息
+                headers: {
+                    aaa:100,
+                    abb:200
+                },
+                //请求体参数
+                data: {
+                    username: 'admin',
+                    userpasd: 'admin'
+                }
+            }).then(response => {
+                console.log(response);
+                //响应状态码
+                console.log(response.status);
+                //响应状态字符串
+                console.log(response.statusText);
+                //响应头信息
+                console.log(response.headers);
+                //响应体
+                console.log(response.data);
+            })
+        }
+    </script>
+</body>
+</html>
