@@ -1,0 +1,8 @@
+{
+    "name": "my_bao",
+    "version": "1.0.0",
+    "main": "./index.js",
+    "description": "包的简短描述，在搜索时显示",
+    "keywords": ["关键字", "关键字"],
+    "license": "ISC"
+}
